@@ -83,9 +83,12 @@ public class utils {
 
 	public static boolean Vec3dArrayContains(Vec3d[] array, Vec3d value) {
 		for (Vec3d element : array) {
-			if (element.equals(value)) {
+			if ((element.x == value.x) && (element.y == value.y) && (element.z == value.z)) {
 				return true;
-			}
+			}//else {
+			// 	System.out.println(element);
+			// 	System.out.println(value);
+			// }
 		}
 		return false;
 	} 
