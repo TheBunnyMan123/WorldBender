@@ -80,4 +80,13 @@ public class utils {
 
 		return subVolumes;
 	}
+
+	public static boolean Vec3dArrayContains(Vec3d[] array, Vec3d value) {
+		for (Vec3d element : array) {
+			if (element.equals(value)) {
+				return true;
+			}
+		}
+		return false;
+	} 
 }
