@@ -8,8 +8,8 @@
 		"TheKillerBunny"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/TheBunnyMan123/fabric-example-mod"
+		"homepage": "https://github.com/TheBunnyMan123/WorldBender",
+		"sources": "https://github.com/TheBunnyMan123/WorldBender"
 	},
 	"license": "MIT",
 	"icon": "assets/worldbender/icon.png",
