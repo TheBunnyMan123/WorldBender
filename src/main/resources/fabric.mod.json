@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "worldbender",
+	"version": "${version}",
+	"name": "WorldBender",
+	"description": "This is a client side mod that allows for mass building on any server that you have op on!",
+	"authors": [
+		"TheKillerBunny"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/TheBunnyMan123/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/worldbender/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"com.thekillerbunny.worldbender.WorldBender"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.15.3",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
