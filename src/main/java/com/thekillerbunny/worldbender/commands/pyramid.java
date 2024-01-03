@@ -24,7 +24,7 @@ public class pyramid {
                                             .getBlockState();
                                     String blockStateString = utils.getStringFromState(blockstate);
                                     long size = context.getArgument("height", Integer.class);
-                                    Vec3d pos = context.getSource().getPlayer().getPos();
+                                    Vec3d pos = context.getSource().getPlayer().getPos().subtract(new Vec3d(0, 1, 0));
 
                                     size *= 2;
 
