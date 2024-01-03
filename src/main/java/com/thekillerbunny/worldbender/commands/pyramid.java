@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.*;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
 import com.thekillerbunny.worldbender.commandQueue;
@@ -28,6 +29,8 @@ public class pyramid {
 
                                     size *= 2;
 
+                                    context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Printing pyramid!"));
+                                    
                                     long i2 = 0;
                                     for (long i = size; i >= 1; i -= 2) {
                                         i2++;

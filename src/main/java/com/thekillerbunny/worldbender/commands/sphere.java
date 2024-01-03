@@ -95,9 +95,11 @@ public class sphere {
                                     }
                                 }
 
+                                context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Printing sphere!"));
+
                                 return 1;
                             } else {
-                                context.getSource().sendFeedback(Text.literal("[WB] No positions set!"));
+                                context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] No positions set!"));
                                 return 0;
                             }
                         })));

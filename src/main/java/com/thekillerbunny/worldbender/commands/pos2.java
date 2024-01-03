@@ -17,7 +17,7 @@ public class pos2 {
 				ClientPlayerEntity player = context.getSource().getPlayer();
 				com.thekillerbunny.worldbender.WorldBender.positions[1] = player.getPos().floorAlongAxes(EnumSet.of(Direction.Axis.X, Direction.Axis.Y, Direction.Axis.Z));
 				com.thekillerbunny.worldbender.WorldBender.positionsSet[1] = true;
-				context.getSource().sendFeedback(Text.literal("[WB] Position 2 set to: " + com.thekillerbunny.worldbender.WorldBender.positions[1]));
+				context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Position 2 set to: " + com.thekillerbunny.worldbender.WorldBender.positions[1]));
             	return 1;
             }
         ));

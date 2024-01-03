@@ -27,13 +27,14 @@ public class replace {
 					String blockStateWith = utils.getStringFromState(blockstate2);
 					Vec3d[][] prisms = utils.dividePrism(com.thekillerbunny.worldbender.WorldBender.positions[0], com.thekillerbunny.worldbender.WorldBender.positions[1]);
 					
+					context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Replacing in selection!"));
 					for (Vec3d[]element : prisms) {
 						commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z + " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " " + blockStateWith + " replace " + blockStateReplace);
 					}
 					// networkHandler.sendChatCommand("");
 					return 1;
 				}else {
-					context.getSource().sendFeedback(Text.literal("[WB] No positions set!"));
+					context.getSource().getPlayer().sendMessage(Text.of("§e[WB] No positions set!"));
 					return 0;
 				}
             }
