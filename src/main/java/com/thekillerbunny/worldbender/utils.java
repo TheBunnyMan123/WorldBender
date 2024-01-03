@@ -40,9 +40,26 @@ public class utils {
 		return stringBuilder.toString();
 	}
 
+	public static void line(Vec3d startPos, Vec3d endPos, String blockState) {
+		Vec3d delta = endPos.subtract(startPos);
+		double steps = Math.max(Math.abs(delta.x), Math.max(Math.abs(delta.y), Math.abs(delta.z)));
+		Vec3d step = delta.multiply(1 / steps);
+		Vec3d pos = startPos;
+		for (long i = 0; i <= steps; i++) {
+			if ((255 >= pos.y) && (pos.y >= -64)) {
+				commandQueue.queue("setblock " + (long) pos.x + " "
+						+ (long) pos.y + " " + (long) pos.z + " " + blockState);
+			}
+			pos = pos.add(step);
+		}
+
+	}
+
 	public static void fill(Vec3d[] points, String blockState) {
-		for (Vec3d[]element : utils.dividePrism(worldBender.positions[0], worldBender.positions[1])) {
-			commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z + " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " " + blockState);
+		for (Vec3d[] element : utils.dividePrism(worldBender.positions[0], worldBender.positions[1])) {
+			commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z
+					+ " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " "
+					+ blockState);
 		}
 	}
 
@@ -88,11 +105,11 @@ public class utils {
 		for (Vec3d element : array) {
 			if ((element.x == value.x) && (element.y == value.y) && (element.z == value.z)) {
 				return true;
-			}//else {
-			// 	System.out.println(element);
-			// 	System.out.println(value);
-			// }
+			} // else {
+				// System.out.println(element);
+				// System.out.println(value);
+				// }
 		}
 		return false;
-	} 
+	}
 }

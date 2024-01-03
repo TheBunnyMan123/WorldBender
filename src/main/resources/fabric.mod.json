@@ -16,7 +16,7 @@
 	"environment": "client",
 	"entrypoints": {
 		"main": [
-			"com.thekillerbunny.worldbender.WorldBender"
+			"com.thekillerbunny.worldbender.worldBender"
 		]
 	},
 	"depends": {

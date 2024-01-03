@@ -28,6 +28,7 @@ public class worldBender implements ModInitializer {
 			sphere.register(dispatcher, registryAccess);
 			pyramid.register(dispatcher, registryAccess);
 			cmdspd.register(dispatcher);
+			line.register(dispatcher, registryAccess);
 		});
 
 		wand.Init();
