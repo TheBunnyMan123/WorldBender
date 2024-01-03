@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 
 public class cmdspd {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(ClientCommandManager.literal("pos1")
+        dispatcher.register(ClientCommandManager.literal("cmdspd")
             .then(ClientCommandManager.argument("speed", IntegerArgumentType.integer())
             .executes(context -> {
 				com.thekillerbunny.worldbender.commandQueue.commandSpeed = context.getArgument("speed", int.class);
