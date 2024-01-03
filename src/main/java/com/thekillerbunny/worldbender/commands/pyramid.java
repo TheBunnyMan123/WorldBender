@@ -3,11 +3,11 @@ package com.thekillerbunny.worldbender.commands;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.*;
 import net.minecraft.util.math.Vec3d;
 
+import com.thekillerbunny.worldbender.commandQueue;
 import com.thekillerbunny.worldbender.utils;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -20,8 +20,6 @@ public class pyramid {
                 .then(ClientCommandManager.argument("block", BlockStateArgumentType.blockState(registryAccess))
                         .then(ClientCommandManager.argument("height", IntegerArgumentType.integer())
                                 .executes(context -> {
-                                    ClientPlayNetworkHandler networkHandler = context.getSource().getClient()
-                                            .getNetworkHandler();
                                     BlockState blockstate = context.getArgument("block", BlockStateArgument.class)
                                             .getBlockState();
                                     String blockStateString = utils.getStringFromState(blockstate);
@@ -39,7 +37,7 @@ public class pyramid {
                                         Vec3d[][] prisms = utils.dividePrism(pos1, pos2);
 
                                         for (Vec3d[] element : prisms) {
-                                            networkHandler.sendChatCommand("fill " + (long) element[0].x + " "
+                                                commandQueue.queue("fill " + (long) element[0].x + " "
                                                     + (long) element[0].y + " " + (long) element[0].z + " "
                                                     + (long) element[1].x + " " + (long) element[1].y + " "
                                                     + (long) element[1].z + " " + blockStateString);

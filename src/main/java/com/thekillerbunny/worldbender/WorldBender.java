@@ -2,6 +2,7 @@ package com.thekillerbunny.worldbender;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.util.math.Vec3d;
 
 import org.slf4j.Logger;
@@ -29,9 +30,10 @@ public class WorldBender implements ModInitializer {
 		});
 
 		Wand.Init();
+		
+		var commandQueueInstance = new commandQueue();
+		ClientTickEvents.END_CLIENT_TICK.register(client -> commandQueueInstance.onEndTick(client));
 
 		LOGGER.info("WorldBender Initialized!");
-			
-
 	}
 }

@@ -62,10 +62,6 @@ public class utils {
 					long ey = Math.min(y + chunkSize - 1, y2);
 					long ez = Math.min(z + chunkSize - 1, z2);
 
-					System.out.println(x + " " + y + " " + z);
-					long chunkSizeAdded = x + chunkSize;
-					System.out.println("add: " + chunkSizeAdded + "(chunkSize = " + chunkSize + ")");
-
 					Vec3d vec1 = new Vec3d(x, y, z);
 					Vec3d vec2 = new Vec3d(ex, ey, ez);
 					Vec3d[] array = { vec1, vec2 };

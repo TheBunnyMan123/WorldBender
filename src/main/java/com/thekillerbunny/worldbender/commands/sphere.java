@@ -3,12 +3,12 @@ package com.thekillerbunny.worldbender.commands;
 import java.util.Arrays;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.thekillerbunny.worldbender.commandQueue;
 import com.thekillerbunny.worldbender.utils;
 
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.BlockStateArgument;
 import net.minecraft.command.argument.BlockStateArgumentType;
@@ -23,8 +23,6 @@ public class sphere {
                         .executes(context -> {
                             if (com.thekillerbunny.worldbender.WorldBender.positionsSet[0]
                                     && com.thekillerbunny.worldbender.WorldBender.positionsSet[1]) {
-                                ClientPlayNetworkHandler networkHandler = context.getSource().getClient()
-                                        .getNetworkHandler();
                                 BlockState blockstate = context.getArgument("block", BlockStateArgument.class)
                                         .getBlockState();
                                 String blockStateString = utils.getStringFromState(blockstate);
@@ -92,7 +90,7 @@ public class sphere {
                                     if (!(utils.Vec3dArrayContains(seenPoints, point))) {
                                         seenPoints = Arrays.copyOf(seenPoints, seenPoints.length + 1);
                                         seenPoints[seenPoints.length - 1] = point;
-                                        networkHandler.sendChatCommand("setblock " + (long) point.x + " "
+                                        commandQueue.queue("setblock " + (long) point.x + " "
                                             + (long) point.y + " " + (long) point.z + " " + blockStateString);
                                     }
                                 }
