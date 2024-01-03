@@ -15,7 +15,7 @@ public class commandQueue implements EndTick {
     public void onEndTick(MinecraftClient client) {
         ClientPlayNetworkHandler networkHandler = client.getNetworkHandler();
         try {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= commandSpeed; i++) {
                 if (commandQueue[0] == null) {break;}
                 networkHandler.sendChatCommand(commandQueue[0]);
                 commandQueue = Arrays.copyOfRange(commandQueue, 1, commandQueue.length);
