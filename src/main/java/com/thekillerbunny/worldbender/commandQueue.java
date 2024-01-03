@@ -20,7 +20,8 @@ public class commandQueue implements EndTick {
                 networkHandler.sendChatCommand(commandQueue[0]);
                 commandQueue = Arrays.copyOfRange(commandQueue, 1, commandQueue.length);
             }
-        }catch(java.lang.NullPointerException e) {}
+        }catch(java.lang.NullPointerException e) {
+        }catch(java.lang.ArrayIndexOutOfBoundsException e) {}
         // throw new UnsupportedOperationException("Unimplemented method 'onStartTick'");
     }
 
