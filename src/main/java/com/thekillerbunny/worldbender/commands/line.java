@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.BlockStateArgument;
 import net.minecraft.command.argument.BlockStateArgumentType;
+import net.minecraft.text.Text;
+
 import com.thekillerbunny.worldbender.utils;
 import com.thekillerbunny.worldbender.worldBender;
 
@@ -19,6 +21,7 @@ public class line {
 					BlockState blockstate = context.getArgument("block", BlockStateArgument.class).getBlockState();
 					String blockStateString = utils.getStringFromState(false, blockstate);
 
+                    context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Printing Line!"));
                     utils.line(worldBender.positions[0], worldBender.positions[1], blockStateString);
                     return 1;
             }
