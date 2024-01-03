@@ -9,9 +9,8 @@ import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
-import com.thekillerbunny.worldbender.commandQueue;
 import com.thekillerbunny.worldbender.utils;
-
+import com.thekillerbunny.worldbender.worldBender;
 import com.mojang.brigadier.CommandDispatcher;
 
 public class replace {
@@ -20,21 +19,19 @@ public class replace {
 			.then(ClientCommandManager.argument("replace", BlockStateArgumentType.blockState(registryAccess))
             .then(ClientCommandManager.argument("with", BlockStateArgumentType.blockState(registryAccess))
             .executes(context -> {
-				if (com.thekillerbunny.worldbender.WorldBender.positionsSet[0] && com.thekillerbunny.worldbender.WorldBender.positionsSet[1]) {
+				if (com.thekillerbunny.worldbender.worldBender.positionsSet[0] && com.thekillerbunny.worldbender.worldBender.positionsSet[1]) {
 					BlockState blockstate = context.getArgument("replace", BlockStateArgument.class).getBlockState();
-					String blockStateReplace = utils.getStringFromState(blockstate);
+					String blockStateReplace = utils.getStringFromState(true, blockstate);
 					BlockState blockstate2 = context.getArgument("with", BlockStateArgument.class).getBlockState();
-					String blockStateWith = utils.getStringFromState(blockstate2);
-					Vec3d[][] prisms = utils.dividePrism(com.thekillerbunny.worldbender.WorldBender.positions[0], com.thekillerbunny.worldbender.WorldBender.positions[1]);
+					String blockStateWith = utils.getStringFromState(false, blockstate2);
 					
 					context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Replacing in selection!"));
-					for (Vec3d[]element : prisms) {
-						commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z + " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " " + blockStateWith + " replace " + blockStateReplace);
-					}
-					// networkHandler.sendChatCommand("");
+
+					Vec3d[] cube = {worldBender.positions[0], worldBender.positions[1]};
+					utils.fill(cube, blockStateWith + " replace " + blockStateReplace);
 					return 1;
 				}else {
-					context.getSource().getPlayer().sendMessage(Text.of("§e[WB] No positions set!"));
+					context.getSource().getPlayer().sendMessage(Text.of("§c[WB] No positions set!"));
 					return 0;
 				}
             }

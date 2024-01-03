@@ -9,9 +9,8 @@ import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
-import com.thekillerbunny.worldbender.commandQueue;
 import com.thekillerbunny.worldbender.utils;
-
+import com.thekillerbunny.worldbender.worldBender;
 import com.mojang.brigadier.CommandDispatcher;
 
 public class set {
@@ -19,19 +18,17 @@ public class set {
         dispatcher.register(ClientCommandManager.literal("set")
 			.then(ClientCommandManager.argument("block", BlockStateArgumentType.blockState(registryAccess))
             .executes(context -> {
-				if (com.thekillerbunny.worldbender.WorldBender.positionsSet[0] && com.thekillerbunny.worldbender.WorldBender.positionsSet[1]) {
+				if (com.thekillerbunny.worldbender.worldBender.positionsSet[0] && com.thekillerbunny.worldbender.worldBender.positionsSet[1]) {
 					BlockState blockstate = context.getArgument("block", BlockStateArgument.class).getBlockState();
-					String blockStateString = utils.getStringFromState(blockstate);
-					Vec3d[][] prisms = utils.dividePrism(com.thekillerbunny.worldbender.WorldBender.positions[0], com.thekillerbunny.worldbender.WorldBender.positions[1]);
+					String blockStateString = utils.getStringFromState(false, blockstate);
 					
 					context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Filling selection!"));
-					for (Vec3d[]element : prisms) {
-						commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z + " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " " + blockStateString);
-					}
-					// networkHandler.sendChatCommand("");
+					
+					Vec3d[] cube = {worldBender.positions[0], worldBender.positions[1]};
+					utils.fill(cube, blockStateString);
 					return 1;
 				}else {
-					context.getSource().getPlayer().sendMessage(Text.of("§e[WB] No positions set!"));
+					context.getSource().getPlayer().sendMessage(Text.of("§c[WB] No positions set!"));
 					return 0;
 				}
             }

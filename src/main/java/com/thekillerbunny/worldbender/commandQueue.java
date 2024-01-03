@@ -8,7 +8,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 
 public class commandQueue implements EndTick {
     static String[] commandQueue = {};
-    static String[] emptyQueue = {};
+    final static String[] emptyQueue = {};
     public static int commandSpeed = 10;
 
     @Override

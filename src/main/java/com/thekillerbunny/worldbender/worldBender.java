@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.thekillerbunny.worldbender.commands.*;
 
-public class WorldBender implements ModInitializer {
+public class worldBender implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -30,10 +30,10 @@ public class WorldBender implements ModInitializer {
 			cmdspd.register(dispatcher);
 		});
 
-		Wand.Init();
+		wand.Init();
 		
-		var commandQueueInstance = new commandQueue();
-		ClientTickEvents.END_CLIENT_TICK.register(client -> commandQueueInstance.onEndTick(client));
+		ClientTickEvents.END_CLIENT_TICK.register(client -> new commandQueue().onEndTick(client));
+		ClientTickEvents.END_CLIENT_TICK.register(client -> new onTick().onEndTick(client));
 
 		LOGGER.info("WorldBender Initialized!");
 	}

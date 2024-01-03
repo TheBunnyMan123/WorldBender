@@ -12,31 +12,38 @@ import net.minecraft.state.property.Property;
 import net.minecraft.util.math.Vec3d;
 
 public class utils {
-	public static String getStringFromState(BlockState state) {
+	public static String getStringFromState(Boolean justName, BlockState state) {
 		String transKey = state.getBlock().getTranslationKey();
 		String[] splitKey = transKey.split("\\.");
 		StringBuilder stringBuilder = new StringBuilder(splitKey[1] + ":" + splitKey[2]);
 
-		Map<Property<?>, Comparable<?>> properties = state.getEntries();
-		if (!properties.isEmpty()) {
-			stringBuilder.append("[");
+		if (!justName) {
+			Map<Property<?>, Comparable<?>> properties = state.getEntries();
+			if (!properties.isEmpty()) {
+				stringBuilder.append("[");
 
-			// Sort properties alphabetically for consistent output
-			List<Property<?>> sortedProperties = new ArrayList<>(properties.keySet());
-			Collections.sort(sortedProperties, Comparator.comparing(Property::getName));
+				// Sort properties alphabetically for consistent output
+				List<Property<?>> sortedProperties = new ArrayList<>(properties.keySet());
+				Collections.sort(sortedProperties, Comparator.comparing(Property::getName));
 
-			for (Property<?> property : sortedProperties) {
-				Comparable<?> value = properties.get(property);
-				stringBuilder.append(property.getName()).append("=").append(value.toString()).append(",");
+				for (Property<?> property : sortedProperties) {
+					Comparable<?> value = properties.get(property);
+					stringBuilder.append(property.getName()).append("=").append(value.toString()).append(",");
+				}
+
+				// Remove trailing comma
+				stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+				stringBuilder.append("]");
 			}
-
-			// Remove trailing comma
-			stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-			stringBuilder.append("]");
 		}
 
 		return stringBuilder.toString();
+	}
 
+	public static void fill(Vec3d[] points, String blockState) {
+		for (Vec3d[]element : utils.dividePrism(worldBender.positions[0], worldBender.positions[1])) {
+			commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z + " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " " + blockState);
+		}
 	}
 
 	public static Vec3d[][] dividePrism(Vec3d pos1, Vec3d pos2) {
