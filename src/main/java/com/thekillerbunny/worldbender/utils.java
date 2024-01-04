@@ -56,9 +56,9 @@ public class utils {
 	}
 
 	public static void fill(Vec3d[] points, String blockState) {
-		for (Vec3d[] element : utils.dividePrism(worldBender.positions[0], worldBender.positions[1])) {
-			commandQueue.queue("fill " + (long) element[0].x + " " + (long) element[0].y + " " + (long) element[0].z
-					+ " " + (long) element[1].x + " " + (long) element[1].y + " " + (long) element[1].z + " "
+		for (Vec3d[] element : utils.dividePrism(points[0], points[1])) {
+			commandQueue.queue("fill " + (long) Math.floor(element[0].x) + " " + (long) Math.floor(element[0].y) + " " + (long) Math.floor(element[0].z)
+					+ " " + (long) Math.floor(element[1].x) + " " + (long) Math.floor(element[1].y) + " " + (long) Math.floor(element[1].z) + " "
 					+ blockState);
 		}
 	}
@@ -76,8 +76,6 @@ public class utils {
 		long z2 = (long) Math.floor(max.z);
 
 		long chunkSize = (long) Math.floor(Math.cbrt(32767));
-
-		System.out.println(x1 + " " + y1 + " " + z1 + " " + x2 + " " + y2 + " " + z2);
 
 		for (long x = x1; x <= x2; x += chunkSize) {
 			for (long y = y1; y <= y2; y += chunkSize) {
