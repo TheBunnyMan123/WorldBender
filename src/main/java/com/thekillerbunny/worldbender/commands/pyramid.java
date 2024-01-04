@@ -29,7 +29,7 @@ public class pyramid {
                 context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Printing pyramid!"));
                 
                 long i2 = 0;
-                for (long i = size; i >= 0; i--) {
+                for (long i = size * 2; i >= 0; i -= 2) {
                     i2++;
                     Vec3d pos1 = new Vec3d(pos.x - i, pos.y + i2, pos.z - i);
                     Vec3d pos2 = new Vec3d(pos.x + i, pos.y + i2, pos.z + i);
