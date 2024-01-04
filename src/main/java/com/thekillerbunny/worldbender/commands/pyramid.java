@@ -23,13 +23,13 @@ public class pyramid {
                 BlockState blockstate = context.getArgument("block", BlockStateArgument.class)
                         .getBlockState();
                 String blockStateString = utils.getStringFromState(false, blockstate);
-                long size = (context.getArgument("height", Integer.class)) * 2;
+                long size = (context.getArgument("height", Integer.class));
                 Vec3d pos = context.getSource().getPlayer().getPos();
 
                 context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Printing pyramid!"));
                 
                 long i2 = 0;
-                for (long i = size; i >= 0; i -= 2) {
+                for (long i = size; i >= 0; i--) {
                     i2++;
                     Vec3d pos1 = new Vec3d(pos.x - i, (pos.y - 1) + i2, pos.z - i);
                     Vec3d pos2 = new Vec3d(pos.x + i, (pos.y - 1) + i2, pos.z + i);
