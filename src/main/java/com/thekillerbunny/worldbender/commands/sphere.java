@@ -3,8 +3,8 @@ package com.thekillerbunny.worldbender.commands;
 import java.util.Arrays;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.thekillerbunny.worldbender.commandQueue;
 import com.thekillerbunny.worldbender.utils;
+import com.thekillerbunny.worldbender.events.commandQueue;
 
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;

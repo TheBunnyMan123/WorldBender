@@ -1,4 +1,4 @@
-package com.thekillerbunny.worldbender;
+package com.thekillerbunny.worldbender.events;
 
 import java.util.Arrays;
 

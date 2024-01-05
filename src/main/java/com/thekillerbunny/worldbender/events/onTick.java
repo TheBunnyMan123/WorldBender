@@ -1,6 +1,5 @@
 package com.thekillerbunny.worldbender.events;
 
-import com.thekillerbunny.worldbender.commandQueue;
 import com.thekillerbunny.worldbender.worldBender;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.EndTick;

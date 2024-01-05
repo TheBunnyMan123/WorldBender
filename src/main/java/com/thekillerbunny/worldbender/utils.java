@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import com.thekillerbunny.worldbender.events.commandQueue;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.Vec3d;

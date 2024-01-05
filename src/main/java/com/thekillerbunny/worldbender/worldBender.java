@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.thekillerbunny.worldbender.commands.*;
-import com.thekillerbunny.worldbender.config.WorldBenderConfig;
 import com.thekillerbunny.worldbender.events.*;
+import com.thekillerbunny.worldbender.events.commandQueue;
 
 public class worldBender implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -19,7 +19,6 @@ public class worldBender implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("worldbender");
 	public static Vec3d positions[] = {new Vec3d(0, 0, 0), new Vec3d(0, 0, 0)};
 	public static boolean positionsSet[] = {false, false};
-	public static final WorldBenderConfig CONFIG = WorldBenderConfig.createAndLoad();
 
 	@Override
 	public void onInitialize() {

@@ -12,8 +12,8 @@ public class cmdspd {
         dispatcher.register(ClientCommandManager.literal("cmdspd")
             .then(ClientCommandManager.argument("speed", IntegerArgumentType.integer())
             .executes(context -> {
-				com.thekillerbunny.worldbender.commandQueue.commandSpeed = context.getArgument("speed", int.class);
-				context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Command speed set to: " + com.thekillerbunny.worldbender.commandQueue.commandSpeed));
+				com.thekillerbunny.worldbender.events.commandQueue.commandSpeed = context.getArgument("speed", int.class);
+				context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Command speed set to: " + com.thekillerbunny.worldbender.events.commandQueue.commandSpeed));
             	return 1;
             }
         )));
