@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.thekillerbunny.worldbender.commands.*;
+import com.thekillerbunny.worldbender.events.*;
 
 public class worldBender implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
