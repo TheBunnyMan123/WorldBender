@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.util.math.Vec3d;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +24,13 @@ public class worldBender implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		try {
+			config.initConfig();
+		} catch (IOException e) {
+			LOGGER.error("WORLDBENDER FAILED TO INITIALIZE", e);
+			return;
+		}
+
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
 			pos1.register(dispatcher);
 			pos2.register(dispatcher);
@@ -39,6 +48,9 @@ public class worldBender implements ModInitializer {
 		
 		ClientTickEvents.END_CLIENT_TICK.register(client -> new commandQueue().onEndTick(client));
 		ClientTickEvents.END_CLIENT_TICK.register(client -> new onTick().onEndTick(client));
+
+		commandQueue.commandSpeed = config.getInt("command_speed");
+		LOGGER.info("[WB] Command speed loaded as " + commandQueue.commandSpeed);
 
 		LOGGER.info("WorldBender Initialized!");
 	}
