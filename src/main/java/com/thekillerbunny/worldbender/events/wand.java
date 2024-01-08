@@ -18,7 +18,7 @@ public class wand {
                 if (vec.equals(com.thekillerbunny.worldbender.worldBender.positions[1])) {return ActionResult.PASS;}
                 com.thekillerbunny.worldbender.worldBender.positions[1] = vec;
                 com.thekillerbunny.worldbender.worldBender.positionsSet[1] = true;
-                player.sendMessage(Text.of("§e[WB] Position 2 set to: " + com.thekillerbunny.worldbender.worldBender.positions[1]));
+                player.sendMessage(Text.translatable("worldbender.pos2").append("§e" + com.thekillerbunny.worldbender.worldBender.positions[1]));
             }
             return ActionResult.PASS;
         });
@@ -28,7 +28,7 @@ public class wand {
                 if (vec.equals(com.thekillerbunny.worldbender.worldBender.positions[0])) {return ActionResult.PASS;}
                 com.thekillerbunny.worldbender.worldBender.positions[0] = vec;
                 com.thekillerbunny.worldbender.worldBender.positionsSet[0] = true;
-                player.sendMessage(Text.of("§e[WB] Position 1 set to: " + com.thekillerbunny.worldbender.worldBender.positions[0]));
+                player.sendMessage(Text.translatable("worldbender.pos1").append("§e" + com.thekillerbunny.worldbender.worldBender.positions[0]));
             }
             return ActionResult.PASS;
         });
