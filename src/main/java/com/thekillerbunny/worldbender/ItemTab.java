@@ -1,79 +1,90 @@
 package com.thekillerbunny.worldbender;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
-public class getItem {
+public class ItemTab {
     private static String endPortalFrame = "/summon falling_block ~ ~1 ~ {BlockState:{Name:\"minecraft:activator_rail\",Properties:{powered:\"false\"}},Time:1,Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-2 ~ ~-1 end_portal_frame[facing=east]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-2 ~ ~ end_portal_frame[facing=east]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-2 ~ ~1 end_portal_frame[facing=east]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~2 ~ ~-1 end_portal_frame[facing=west]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~2 ~ ~ end_portal_frame[facing=west]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~2 ~ ~1 end_portal_frame[facing=west]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-1 ~ ~2 end_portal_frame[facing=north]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~ ~ ~2 end_portal_frame[facing=north]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~1 ~ ~2 end_portal_frame[facing=north]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-1 ~ ~-2 end_portal_frame[facing=south]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~ ~ ~-2 end_portal_frame[facing=south]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~1 ~ ~-2 end_portal_frame[facing=south]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"kill @e[type=command_block_minecart,distance=..1]\"}]}]}]}]}]}]}]}]}]}]}]}],DisplayState:{Name:\"minecraft:activator_rail\",Properties:{powered:\"false\"}}}]}";
     private static String explodingArrows = "/summon falling_block ~ ~1 ~ {BlockState:{Name:\"minecraft:activator_rail\"},Time:1,Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"fill ~-3 ~ ~-1 ~-6 ~ ~1 minecraft:black_concrete\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"fill ~-3 ~2 ~-1 ~-6 ~2 ~1 minecraft:black_concrete\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"fill ~-3 ~1 ~-1 ~-6 ~1 ~1 minecraft:tinted_glass\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-3 ~1 ~ minecraft:black_concrete\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-2 ~1 ~ lever[face=wall,facing=east]\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-4 ~1 ~ minecraft:repeating_command_block[facing=west]{Command:\\\"execute as @e[type=arrow,nbt={inGround:1b}] at @e[type=arrow,nbt={inGround:1b}] run summon tnt ~ ~ ~\\\"}\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-5 ~1 ~ minecraft:chain_command_block[facing=west]{auto:1b,Command:\\\"kill @e[type=arrow,nbt={inGround:1b}]\\\"}\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"setblock ~-2 ~2 ~ oak_wall_sign[facing=east]{front_text:{color:\\\"red\\\",has_glowing_text:1b,messages:['{\\\"text\\\":\\\"\\\"}','{\\\"text\\\":\\\"Exploding\\\"}','{\\\"text\\\":\\\"Arrows\\\"}','{\\\"text\\\":\\\"\\\"}']}} replace\",Passengers:[{id:\"minecraft:command_block_minecart\",Command:\"kill @e[type=minecraft:command_block_minecart,distance=..1]\"}]}]}]}]}]}]}]}]}]}";
-
-    public ItemStack CustomBlocksShulker() throws CommandSyntaxException {
-        NbtCompound NBT = createShulkerBoxNbt();
-
-        ItemStack item = new ItemStack(Items.SHULKER_BOX, 1);
-        item.setNbt(NBT);
-        return item;
-    }
-
-    public static NbtCompound createShulkerBoxNbt() {
-        NbtCompound nbt = new NbtCompound();
-
-        // Basic Shulker Box tags
-        nbt.putString("id", "minecraft:shulker_box");
-        nbt.putByte("Count", (byte) 1);
-        NbtCompound display = new NbtCompound();
-        display.putString("Name", "{\"text\":\"Custom Blocks\",\"italic\":false}");
-
-        // BlockEntityTag with Items list
-        NbtCompound blockEntityTag = new NbtCompound();
-        NbtList itemsList = new NbtList();
-
-        // Add items with their respective NBT
+    private static NbtCompound[] Items = {
         // Slot 0: Unlit Campfire
-        itemsList.add(createItemNbt("minecraft:campfire", 0, 1,
+        createItemNbt("minecraft:campfire", 0, 1,
                 createNbt(new String[][] { { "Name", "{\"text\":\"Unlit Campfire\",\"italic\":false}" } }),
-                createNbt("BlockStateTag", new String[][] { { "lit", "false" } })));
+                createNbt("BlockStateTag", new String[][] { { "lit", "false" } })),
 
         // Slot 1: Sculk Shrieker (Warden)
-        itemsList.add(createItemNbt("minecraft:sculk_shrieker", 1, 1,
+        createItemNbt("minecraft:sculk_shrieker", 1, 1,
                 createNbt(new String[][] { { "Name", "{\"text\":\"Sculk Shrieker (Warden)\",\"italic\":false}" } }),
-                createNbt("BlockStateTag", new String[][] { { "can_summon", "true" } })));
+                createNbt("BlockStateTag", new String[][] { { "can_summon", "true" } })),
 
         // Slot 2: Powered Repeater
-        itemsList.add(createItemNbt("minecraft:repeater", 2, 1,
+        createItemNbt("minecraft:repeater", 2, 1,
                 createNbt(new String[][] { { "Name", "{\"text\":\"Powered Repeater\",\"italic\":false}" } }),
-                createNbt("BlockStateTag", new String[][] { { "powered", "true" }, { "locked", "true" } })));
+                createNbt("BlockStateTag", new String[][] { { "powered", "true" }, { "locked", "true" } })),
         // Slot 3: Nether Portal
-        itemsList.add(createItemNbt("minecraft:command_block", 3, 1,
+        createItemNbt("minecraft:command_block", 3, 1,
                 createNbt(new String[][] {
                         { "Name", "{\"text\":\"Nether Portal\",\"italic\":false,\"color\":\"light_purple\"}" } }),
-                createNbt("BlockEntityTag", new String[][] { { "Command", "setblock ~ ~ ~ nether_portal" } }, true)));
+                createNbt("BlockEntityTag", new String[][] { { "Command", "setblock ~ ~ ~ nether_portal" } }, true)),
         // Slot 4: End Portal
-        itemsList.add(createItemNbt("minecraft:command_block", 4, 1,
+        createItemNbt("minecraft:command_block", 4, 1,
                 createNbt(new String[][] {
                         { "Name", "{\"text\":\"End Portal\",\"italic\":false,\"color\":\"light_purple\"}" } }),
-                createNbt("BlockEntityTag", new String[][] { { "Command", "setblock ~ ~ ~ end_portal" } }, true)));
+                createNbt("BlockEntityTag", new String[][] { { "Command", "setblock ~ ~ ~ end_portal" } }, true)),
         // Slot 5: End Gateway
-        itemsList.add(createItemNbt("minecraft:command_block", 5, 1,
+        createItemNbt("minecraft:command_block", 5, 1,
                 createNbt(new String[][] {
                         { "Name", "{\"text\":\"End Gateway\",\"italic\":false,\"color\":\"light_purple\"}" } }),
-                createNbt("BlockEntityTag", new String[][] { { "Command", "setblock ~ ~ ~ end_gateway" } }, true)));
+                createNbt("BlockEntityTag", new String[][] { { "Command", "setblock ~ ~ ~ end_gateway" } }, true)),
         // Slot 6: End Portal Frame
-        itemsList.add(createItemNbt("minecraft:command_block", 6, 1,
+        createItemNbt("minecraft:command_block", 6, 1,
                 createNbt(new String[][] { { "Name",
                         "{\"text\":\"End Portal Frame (power with lever)\",\"italic\":false,\"color\":\"light_purple\"}" } }),
-                createNbt("BlockEntityTag", new String[][] { { "Command", endPortalFrame } })));
-        // Slot 7: Stack of totems
-        itemsList.add(createItemNbt("minecraft:totem_of_undying", 7, 64,
-                null, null));
+                createNbt("BlockEntityTag", new String[][] { { "Command", endPortalFrame } })),
+        // // Slot 7: Stack of totems
+        // createItemNbt("minecraft:totem_of_undying", 7, 64,
+        //         null, null),
         // Slot 8: Open Barrel
-        itemsList.add(createItemNbt("minecraft:barrel", 8, 1,
+        createItemNbt("minecraft:barrel", 8, 1,
                 createNbt(new String[][] { { "Name", "{\"text\":\"Open Barrel\",\"italic\":false}" } }),
-                createNbt("BlockStateTag", new String[][] { { "open", "true" } })));
+                createNbt("BlockStateTag", new String[][] { { "open", "true" } })),
         // Slot 9: Full Chisled Bookshelf
+        bookshelfNbt(),
+
+        // Slot 10: Exploding Arrows
+        createItemNbt("minecraft:command_block", 10, 1,
+                createNbt(new String[][] { { "Name",
+                        "{\"text\":\"Exploding Arrows (power with lever)\",\"italic\":false,\"color\":\"light_purple\"}" } }),
+                createNbt("BlockEntityTag", new String[][] { { "Command", explodingArrows } })),
+
+        // Slot 11: All inside mushroom
+        createItemNbt("minecraft:mushroom_stem", 11, 1,
+                createNbt(new String[][] { { "Name", "{\"text\":\"All Inside Mushroom Block\",\"italic\":false}" } }),
+                createNbt("BlockStateTag", new String[][] { { "up", "false" }, { "down", "false" }, { "north", "false" }, { "south", "false" }, { "east", "false" }, { "west", "false" } })),
+    };
+
+    public static void init(Item icon) {
+        ItemGroup itemGroup = FabricItemGroup.builder()
+    		.icon(() -> new ItemStack(icon))
+    		.displayName(Text.translatable("itemGroup.worldbender.custom_items"))
+        	.entries((context, entries) -> {
+                        for (NbtCompound NBT : Items) {
+    			        entries.add(ItemStack.fromNbt(NBT));
+                        }
+    		})
+    		.build();
+
+        Registry.register(Registries.ITEM_GROUP, new Identifier("worldbender", "item_group"), itemGroup);
+    }
+
+    public static NbtCompound bookshelfNbt() {
         NbtCompound BookshelfBlockStateNbt = createNbt(new String[][] { { "slot_0_occupied", "true" },
                 { "slot_1_occupied", "true" }, { "slot_2_occupied", "true" }, { "slot_3_occupied", "true" },
                 { "slot_4_occupied", "true" }, { "slot_5_occupied", "true" } });
@@ -105,29 +116,34 @@ public class getItem {
         BookshelfNbtTag.put("BlockEntityTag", BookshelfNbt);
         NbtCompound BookshelfNbtInTag = new NbtCompound();
         BookshelfNbtInTag.put("tag", BookshelfNbtTag);
-        itemsList.add(createItemNbt("minecraft:chiseled_bookshelf", 9, 1,
+        return createItemNbt("minecraft:chiseled_bookshelf", 9, 1,
                 createNbt(new String[][] { { "Name", "{\"text\":\"Full Chisled Bookshelf\",\"italic\":false}" } }),
-                BookshelfNbtTag));
+                BookshelfNbtTag);
+    };
 
-        // Slot 10: Exploding Arrows
-        itemsList.add(createItemNbt("minecraft:command_block", 10, 1,
-                createNbt(new String[][] { { "Name",
-                        "{\"text\":\"Exploding Arrows (power with lever)\",\"italic\":false,\"color\":\"light_purple\"}" } }),
-                createNbt("BlockEntityTag", new String[][] { { "Command", explodingArrows } })));
+//     public static NbtCompound createShulkerBoxNbt() {
+//         NbtCompound nbt = new NbtCompound();
 
-        // Slot 11: All inside mushroom
-        itemsList.add(createItemNbt("minecraft:mushroom_stem", 11, 1,
-                createNbt(new String[][] { { "Name", "{\"text\":\"All Inside Mushroom Block\",\"italic\":false}" } }),
-                createNbt("BlockStateTag", new String[][] { { "up", "false" }, { "down", "false" }, { "north", "false" }, { "south", "false" }, { "east", "false" }, { "west", "false" } })));
+//         // Basic Shulker Box tags
+//         nbt.putString("id", "minecraft:shulker_box");
+//         nbt.putByte("Count", (byte) 1);
+//         NbtCompound display = new NbtCompound();
+//         display.putString("Name", "{\"text\":\"Custom Blocks\",\"italic\":false}");
 
-        blockEntityTag.put("Items", itemsList);
-        NbtCompound tag = new NbtCompound();
-        tag.put("BlockEntityTag", blockEntityTag);
-        tag.put("display", display);
-        nbt.put("tag", tag);
+//         // BlockEntityTag with Items list
+//         NbtCompound blockEntityTag = new NbtCompound();
+//         NbtList itemsList = new NbtList();
 
-        return nbt;
-    }
+//         // Add items with their respective NBT
+
+//         blockEntityTag.put("Items", itemsList);
+//         NbtCompound tag = new NbtCompound();
+//         tag.put("BlockEntityTag", blockEntityTag);
+//         tag.put("display", display);
+//         nbt.put("tag", tag);
+
+//         return nbt;
+//     }
 
     private static NbtCompound createNbt(String parent, String[][] tags, boolean auto) {
         NbtCompound FinalNbt = new NbtCompound();

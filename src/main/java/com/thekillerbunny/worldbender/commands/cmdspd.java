@@ -16,14 +16,14 @@ public class cmdspd {
             .executes(context -> {
 				commandQueue.commandSpeed = context.getArgument("speed", int.class);
                 config.set("command_speed", commandQueue.commandSpeed);
-				context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Command speed set to: " + commandQueue.commandSpeed));
+				context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.setcommandspeed").append("§e" + commandQueue.commandSpeed));
             	return 1;
             }
         )));
 
         dispatcher.register(ClientCommandManager.literal("cmdspd")
             .executes(context -> {
-				context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Command speed is currently set to: " + commandQueue.commandSpeed));
+				context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.getcommandspeed").append("§e" + commandQueue.commandSpeed));
             	return 1;
             }
         ));

@@ -22,13 +22,13 @@ public class set {
 					BlockState blockstate = context.getArgument("block", BlockStateArgument.class).getBlockState();
 					String blockStateString = utils.getStringFromState(false, blockstate);
 					
-					context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Filling selection!"));
+					context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.filling"));
 					
 					Vec3d[] cube = {worldBender.positions[0], worldBender.positions[1]};
 					utils.fill(cube, blockStateString);
 					return 1;
 				}else {
-					context.getSource().getPlayer().sendMessage(Text.of("§c[WB] No positions set!"));
+					context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.nopositions"));
 					return 0;
 				}
             }

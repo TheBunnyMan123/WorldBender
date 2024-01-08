@@ -18,10 +18,14 @@ public class line {
         dispatcher.register(ClientCommandManager.literal("line")
 			.then(ClientCommandManager.argument("block", BlockStateArgumentType.blockState(registryAccess))
             .executes(context -> {
+                    if (!((worldBender.positionsSet[0]) && (worldBender.positionsSet[1]))) {
+                        context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.nopositions"));
+                        return 0;
+                    }
 					BlockState blockstate = context.getArgument("block", BlockStateArgument.class).getBlockState();
 					String blockStateString = utils.getStringFromState(false, blockstate);
 
-                    context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Printing Line!"));
+                    context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.printing"));
                     utils.line(worldBender.positions[0], worldBender.positions[1], blockStateString);
                     return 1;
             }

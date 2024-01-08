@@ -18,7 +18,7 @@ public class gateway {
                 Vec3d pos = new Vec3d(context.getArgument("destination X", double.class), context.getArgument("destination Y", double.class), context.getArgument("destination Z", double.class));
                 String command = "give @p command_block{BlockEntityTag:{auto:1b,Command:\"/setblock ~ ~ ~ end_gateway{ExactTeleport:1b,ExitPortal:{X:" + pos.x + ",Y:" + pos.y + ",Z:" + pos.z + "}} replace\"}}";
                 context.getSource().getClient().getNetworkHandler().sendChatCommand(command);
-                context.getSource().getPlayer().sendMessage(Text.of("§e[WB] Generated!"));
+                context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.generated"));
                 return 1;
             }
         )))));

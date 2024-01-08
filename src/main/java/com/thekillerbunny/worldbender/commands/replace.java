@@ -25,13 +25,13 @@ public class replace {
 					BlockState blockstate2 = context.getArgument("with", BlockStateArgument.class).getBlockState();
 					String blockStateWith = utils.getStringFromState(false, blockstate2);
 					
-					context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Replacing in selection!"));
+					context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.replacing"));
 
 					Vec3d[] cube = {worldBender.positions[0], worldBender.positions[1]};
 					utils.fill(cube, blockStateWith + " replace " + blockStateReplace);
 					return 1;
 				}else {
-					context.getSource().getPlayer().sendMessage(Text.of("§c[WB] No positions set!"));
+					context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.nopositions"));
 					return 0;
 				}
             }

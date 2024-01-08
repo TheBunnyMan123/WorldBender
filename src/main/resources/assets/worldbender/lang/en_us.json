@@ -1,6 +1,12 @@
 {
-    "title.worldbender": "WorldBender",
-    "title.worldbender.config": "WorldBender Config",
-    "worldbender.generating": "[WB] Generating!",
-    "worldbender.printing": "[WB] Printing!"
+    "worldbender.printing": "§e[WB] Printing!",
+    "worldbender.filling": "§e[WB] Filling!",
+    "worldbender.replacing": "§e[WB] Replacing!",
+    "worldbender.nopositions": "§e[WB] No positions set",
+    "worldbender.pos2": "§e[WB] Set position 2 to: ",
+    "worldbender.pos1": "§e[WB] Set position 1 to: ",
+    "worldbender.setcommandspeed": "§e[WB] Set command speed to: ",
+    "worldbender.getcommandspeed": "§e[WB] Command speed currently set to: ",
+    "worldbender.generated": "§e[WB] Generated!",
+    "itemGroup.worldbender.custom_items": "WorldBender Items"
 }

@@ -95,11 +95,11 @@ public class sphere {
                         }
                     }
 
-                    context.getSource().getPlayer().sendMessage(Text.of("§e§e[WB] Printing sphere!"));
+                    context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.printing"));
 
                     return 1;
                 } else {
-                    context.getSource().getPlayer().sendMessage(Text.of("§c[WB] No positions set!"));
+                    context.getSource().getPlayer().sendMessage(Text.translatable("worldbender.nopositions"));
                     return 0;
                 }
             })));

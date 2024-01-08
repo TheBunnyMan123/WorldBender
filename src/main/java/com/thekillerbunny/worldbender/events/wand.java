@@ -1,7 +1,5 @@
 package com.thekillerbunny.worldbender.events;
 
-import com.thekillerbunny.worldbender.worldBender;
-
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.item.Items;

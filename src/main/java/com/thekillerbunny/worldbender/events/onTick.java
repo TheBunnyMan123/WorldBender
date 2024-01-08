@@ -1,7 +1,5 @@
 package com.thekillerbunny.worldbender.events;
 
-import com.thekillerbunny.worldbender.worldBender;
-
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.EndTick;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;

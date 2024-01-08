@@ -3,6 +3,7 @@ package com.thekillerbunny.worldbender;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.Vec3d;
 
 import java.io.IOException;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import com.thekillerbunny.worldbender.commands.*;
 import com.thekillerbunny.worldbender.events.*;
-import com.thekillerbunny.worldbender.events.commandQueue;
 
 public class worldBender implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -40,7 +40,6 @@ public class worldBender implements ModInitializer {
 			pyramid.register(dispatcher, registryAccess);
 			cmdspd.register(dispatcher);
 			line.register(dispatcher, registryAccess);
-			blocks.register(dispatcher);
 			gateway.register(dispatcher);
 		});
 
@@ -51,6 +50,8 @@ public class worldBender implements ModInitializer {
 
 		commandQueue.commandSpeed = config.getInt("command_speed");
 		LOGGER.info("[WB] Command speed loaded as " + commandQueue.commandSpeed);
+
+		ItemTab.init(Items.DEBUG_STICK);
 
 		LOGGER.info("WorldBender Initialized!");
 	}
