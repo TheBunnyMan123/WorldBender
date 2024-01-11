@@ -29,6 +29,8 @@ public class ItemTab {
 
         //new NbtCompound().put("EntityData", beeEntityData);
     private static NbtCompound[] Items = {
+        wands.treeWandNbt,
+
         // Selection Wand
         createItemNbt("minecraft:debug_stick",
                 createNbt(new String[][] { { "Name", "{\"text\":\"Selection Wand\",\"italic\":false,\"color\":\"gold\"}" } }),
@@ -150,7 +152,7 @@ public class ItemTab {
                 BookshelfNbtTag);
     };
 
-    private static NbtCompound createNbt(String parent, String[][] tags, boolean auto) {
+    static NbtCompound createNbt(String parent, String[][] tags, boolean auto) {
         NbtCompound FinalNbt = new NbtCompound();
         NbtCompound parentNbt = new NbtCompound();
         for (String[] tag : tags) {
@@ -163,7 +165,7 @@ public class ItemTab {
         return FinalNbt;
     }
 
-    private static NbtCompound createNbt(String[][] tags) {
+    static NbtCompound createNbt(String[][] tags) {
         NbtCompound FinalNbt = new NbtCompound();
         for (String[] tag : tags) {
             FinalNbt.putString(tag[0], tag[1]);
@@ -171,7 +173,7 @@ public class ItemTab {
         return FinalNbt;
     }
 
-    private static NbtCompound createNbt(String parent, String listParent, NbtList list) {
+    static NbtCompound createNbt(String parent, String listParent, NbtList list) {
         NbtCompound FinalNbt = new NbtCompound();
         NbtCompound parentNbt = new NbtCompound();
 
@@ -181,7 +183,7 @@ public class ItemTab {
         return FinalNbt;
     }
 
-    private static NbtCompound createNbt(String parent, String[][] tags) {
+    static NbtCompound createNbt(String parent, String[][] tags) {
         NbtCompound FinalNbt = new NbtCompound();
         NbtCompound parentNbt = new NbtCompound();
         for (String[] tag : tags) {
@@ -192,7 +194,7 @@ public class ItemTab {
     }
 
     // Helper method to create item NBT with individual data
-    private static NbtCompound createItemNbt(String itemId, NbtCompound display, NbtCompound tag) {
+    static NbtCompound createItemNbt(String itemId, NbtCompound display, NbtCompound tag) {
         NbtCompound itemNbt = new NbtCompound();
         itemNbt.putString("id", itemId);
         itemNbt.putByte("Count", (byte) 1);
