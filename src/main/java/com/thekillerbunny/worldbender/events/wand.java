@@ -40,10 +40,53 @@ public class wand {
                 return ActionResult.PASS;
             }
             alreadyRanAtk++;
-            
             if (player.getStackInHand(hand).getName().getString().equals(wands.treeWand.getName().getString())) {
                 Vec3d pos = new Vec3d(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-                MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:trees_plains " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                String sapling = player.getOffHandStack().getItem().getName().getString();
+                // Sapling being held determines tree spawned. Amount of sapling determines tree mode. eg: jungle vs mega jungle
+                if (sapling.equalsIgnoreCase(Items.OAK_SAPLING.getName().getString())) {
+                    if (player.getOffHandStack().getCount() == 2) {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:fancy_oak " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }else if (player.getOffHandStack().getCount() == 3) {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:swamp_oak " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }else {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:oak " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }
+                }else if (sapling.equalsIgnoreCase(Items.SPRUCE_SAPLING.getName().getString())) {
+                    if (player.getOffHandStack().getCount() == 2) {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:mega_spruce " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }else {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:spruce " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }
+                }else if (sapling.equalsIgnoreCase(Items.BIRCH_SAPLING.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:birch " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.JUNGLE_SAPLING.getName().getString())) {
+                    if (player.getOffHandStack().getCount() == 2) {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:mega_jungle_tree " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }else {
+                        MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:jungle_tree_no_vine " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                    }
+                }else if (sapling.equalsIgnoreCase(Items.ACACIA_SAPLING.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:acacia " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.DARK_OAK_SAPLING.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:dark_oak " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.CHERRY_SAPLING.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:cherry " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.CRIMSON_FUNGUS.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:crimson_fungus " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.WARPED_FUNGUS.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:warped_fungus " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.AZALEA.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:azalea_tree " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.FLOWERING_AZALEA.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:azalea_tree " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.RED_MUSHROOM.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:huge_red_mushroom " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else if (sapling.equalsIgnoreCase(Items.BROWN_MUSHROOM.getName().getString())) {
+                    MinecraftClient.getInstance().getNetworkHandler().sendChatCommand("place feature minecraft:huge_brown_mushroom " + (int) pos.x + " " + (int) (pos.y + 1) + " " + (int) pos.z);
+                }else {
+                    player.sendMessage(Text.translatable("worldbender.saplingneeded"));
+                }
             }else if (player.getStackInHand(hand).getItem() == Items.DEBUG_STICK) {
                 Vec3d vec = new Vec3d(blockPos.getX(), blockPos.getY(), blockPos.getZ());
                 if (vec.equals(com.thekillerbunny.worldbender.worldBender.positions[0])) {return ActionResult.PASS;}

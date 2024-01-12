@@ -8,5 +8,6 @@
     "worldbender.setcommandspeed": "§e[WB] Set command speed to: ",
     "worldbender.getcommandspeed": "§e[WB] Command speed currently set to: ",
     "worldbender.generated": "§e[WB] Generated!",
-    "itemGroup.worldbender.custom_items": "WorldBender Items"
+    "itemGroup.worldbender.custom_items": "WorldBender Items",
+    "worldbender.saplingneeded": "§e[WB] Please put a sapling or fungus in your off hand"
 }
