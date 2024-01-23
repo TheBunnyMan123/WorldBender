@@ -11,11 +11,11 @@ import java.io.*;
 public class config {
     static Path configDir = FabricLoader.getInstance().getConfigDir();
     static File configFile = new File(configDir.toFile(), "worldbender.json");
+    static File exampleScript = new File(configDir.toFile(), "worldbender-scripts/example.js");
     static JsonObject jsonObject = new JsonObject();
 
     public static void initConfig() throws IOException {
         if (!configFile.exists()) {
-            
             // Create parent directories if needed
             configFile.getParentFile().mkdirs();
 
@@ -23,8 +23,8 @@ public class config {
             FileWriter writer = new FileWriter(configFile);
             writer.write("{\"command_speed\": 10}");
             writer.close();
-            
         }
+
         FileReader reader = new FileReader(configFile);
 
         char[] buffer = new char[(int) configFile.length()];

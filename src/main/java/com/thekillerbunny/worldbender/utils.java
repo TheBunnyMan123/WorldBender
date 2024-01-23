@@ -12,8 +12,34 @@ import com.thekillerbunny.worldbender.events.commandQueue;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.Vec3d;
+import javax.script.*;
 
 public class utils {
+	private static ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+	private static ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("JavaScript");
+
+	public static Double mathEval(String expression) {
+		Double result = 0.00;
+		try {
+			result = (Double) scriptEngine.eval(expression);
+			return result;
+		} catch (ScriptException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static String scriptEval(String expression) {
+		String result = "";
+		try {
+			result = (String) scriptEngine.eval(expression);
+			return result;
+		} catch (ScriptException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public static String getStringFromState(Boolean justName, BlockState state) {
 		String transKey = state.getBlock().getTranslationKey();
 		String[] splitKey = transKey.split("\\.");

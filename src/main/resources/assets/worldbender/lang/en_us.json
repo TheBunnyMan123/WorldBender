@@ -9,5 +9,6 @@
     "worldbender.getcommandspeed": "§e[WB] Command speed currently set to: ",
     "worldbender.generated": "§e[WB] Generated!",
     "itemGroup.worldbender.custom_items": "WorldBender Items",
+    "worldbender.result": "§e[WB] Result: ",
     "worldbender.saplingneeded": "§e[WB] Please put a sapling or fungus in your off hand. The generation mode depends on the amount of the sapling. eg: 2 = big, and 3 = swamp (on oak)"
 }
