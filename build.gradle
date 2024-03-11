@@ -19,9 +19,6 @@ repositories {
 	// for more information about repositories.
 
 	mavenCentral()
-
-	// OwO lib
-	maven { url 'https://maven.wispforest.io' }
 }
 
 fabricApi {
